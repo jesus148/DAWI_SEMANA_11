@@ -56,6 +56,13 @@
 			<optional>true</optional>
 		</dependency>
 		
+<!--		DEPENDENCIA PARA EL JASPER REPORT , PONER SIEMPRE AL FINAL-->
+     <dependency>
+    <groupId>net.sf.jasperreports</groupId>
+    <artifactId>jasperreports</artifactId>
+    <version>6.20.5</version>
+     </dependency>
+		
 	</dependencies>
 
 	<build>

@@ -16,6 +16,8 @@
 <title>Ejemplos de CIBERTEC - Jorge Jacinto</title>
 </head>
 <body>
+
+<form id="id_form"> 
 	<div class="container">
 		<h3>Consulta Empleado</h3>
 		<div class="row" style="margin-top: 3%">
@@ -49,6 +51,13 @@
 		<div class="row" style="margin-top: 3%">
 			<div class="col-md-12" align="center">
 				<button type="button" class="btn btn-primary" id="id_btn_filtra">FILTRA</button>
+				
+<!-- 				para el reporte con jasper  -->
+				<button type="button" class="btn btn-primary" id="id_reporte">PDF</button>
+				
+				
+				
+				
 			</div>
 		</div>
 		<div class="row" style="margin-top: 3%">
@@ -70,7 +79,13 @@
 			</div>
 		</div>
 	</div>
+	
+	</form>
 <script type="text/javascript">
+
+
+
+
 
 $.getJSON("listaPais", {}, function(data){
 	$.each(data, function(i,item){
@@ -78,10 +93,26 @@ $.getJSON("listaPais", {}, function(data){
 	});
 });
 
+
+
+
+// PARA EL REPORTE DEL JASPER CON EL ID DEL CONTROLLER ('action', 'reporteEmpleadoPdf');
+
+$("#id_reporte").click(function(){
+	$("#id_form").attr('action', 'reporteEmpleadoPdf');
+	$("#id_form").submit();
+});
+
+
+
+// METODO FILTRA POR VARIOS CAMPOS O METODOS
+
 $("#id_btn_filtra").click(function(){
 	var varEstado = $("#id_estado").is(':checked') ? 1 : 0;  
 	var varPais = $("#id_pais").val();
 	var varNomApe = $("#id_nombres").val();
+	
+	//si no selecciona nada para listaR todo los empleados , son valores por default
 	var varFecDesde = $("#id_desde").val() == '' ?'1900-01-01' : $("#id_desde").val();
 	var varFecHasta = $("#id_hasta").val() == '' ?'9999-01-01' : $("#id_hasta").val();
 	
@@ -96,6 +127,8 @@ $("#id_btn_filtra").click(function(){
 		return;
 	}
 	
+	
+	//RECORDAR VALIDAR LAS FECHAS FECHA DESDE DEBE SER MENOR A LA FECHA FECHASTA (ESO ESTA EN E GLOBAL.JS EN > SRC > STATIC > AHI ESTA EL METODO)
 	$.getJSON("consultaEmpleado", {"estado": varEstado, 
 								   "idPais": varPais, 
 								   "nomApe": varNomApe, 
@@ -104,6 +137,12 @@ $("#id_btn_filtra").click(function(){
 		agregarGrilla(data);
 	});
 });
+
+
+
+
+
+
 
 
 function agregarGrilla(lista){
@@ -129,6 +168,12 @@ function agregarGrilla(lista){
 			]                                     
 	    });
 }
+
+
+
+
+
+
 
 </script>
 

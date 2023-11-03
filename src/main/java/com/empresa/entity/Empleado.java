@@ -1,5 +1,6 @@
 package com.empresa.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,6 +24,9 @@ import lombok.Setter;
 @Entity
 @Table(name = "empleado")
 public class Empleado {
+	
+	//en el jasper repórt en los field , los nombre iguales a la clase guia
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idEmpleado;
@@ -47,6 +51,41 @@ public class Empleado {
 	@ManyToOne
 	@JoinColumn(name = "idPais")
 	private Pais pais;
+	
+	
+	
+	
+	
+	
+	//atributos para el reporte estado
+	public String getReporteestado() {
+		return estado == 1? "Activo" : "Inactivo";
+		
+	}
+	
+	public String getReportepais() {
+		return pais.getIdPais() + "- "+  pais.getNombre();
+		
+	}
+	
+	
+	public String getReportefechaNacimiento() {
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(fechaNacimiento);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 
